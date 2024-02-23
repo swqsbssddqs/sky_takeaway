@@ -86,12 +86,31 @@ public class EmployeeController {
         return Result.success();
     }
 
+    /**
+     * 分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
     @GetMapping("/page")
+    @ApiOperation("员工分页查询")
     public Result<PageResult> employeePageQuery(EmployeePageQueryDTO employeePageQueryDTO){
         PageHelper.startPage(employeePageQueryDTO.getPage(),employeePageQueryDTO.getPageSize());//会动态的凭借limit 0,10到sql语句中
-
-
         PageResult pageResult =  employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
     }
+
+    /**
+     * 修改员工状态
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用、禁用员工账号")
+    public Result<String> changeStatus(@PathVariable Integer status,long id){
+        log.info("启用、禁用员工账号:{},{}",status,id);
+        employeeService.setStatus(id,status);
+        return Result.success();
+  }
+
 }

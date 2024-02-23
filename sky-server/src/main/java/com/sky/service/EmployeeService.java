@@ -18,4 +18,6 @@ public interface EmployeeService {
     Employee signin(EmployeeDTO employeeDTO);
 
     PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    void setStatus(long id, Integer status);
 }
