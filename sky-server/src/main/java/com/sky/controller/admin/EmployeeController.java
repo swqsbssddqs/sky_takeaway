@@ -112,5 +112,14 @@ public class EmployeeController {
         employeeService.setStatus(id,status);
         return Result.success();
   }
-
+    @GetMapping("/{id}")
+    public Result<Employee> getEmployee(@PathVariable long id){
+        Employee employee =  employeeService.getEmployeeById(id);
+        return Result.success(employee);
+    }
+    @PutMapping
+    public Result editEmployee(@RequestBody EmployeeDTO employeeDTO){
+        employeeService.editEmployee(employeeDTO);
+        return Result.success();
+    }
 }
